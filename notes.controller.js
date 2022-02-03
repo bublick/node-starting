@@ -24,6 +24,12 @@ async function removeNote(id){
     await fs.writeFile(notesPath, JSON.stringify(filteredNotes))
 }
 
+async function editNote(id, title){
+    const notes = await getNotes()
+    const updatedNotes = notes.map( (note) => (note.id === id ? {...note, title} : note))
+    await fs.writeFile(notesPath, JSON.stringify(updatedNotes))
+}
+
 async function getNotes(){
     const notes = await fs.readFile(notesPath, {encoding: 'utf-8'})
     return Array.isArray(JSON.parse(notes)) ? JSON.parse(notes) : []
@@ -39,5 +45,5 @@ async function printNotes(){
 }
 
 module.exports = {
-    addNote, removeNote, printNotes
+    addNote, getNotes, removeNote, editNote
 }
