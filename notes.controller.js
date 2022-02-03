@@ -28,6 +28,7 @@ async function editNote(id, title){
     const notes = await getNotes()
     const updatedNotes = notes.map( (note) => (note.id === id ? {...note, title} : note))
     await fs.writeFile(notesPath, JSON.stringify(updatedNotes))
+    console.log(chalk.bgGreen(`Task with ${chalk.blue(id)} was edited. New title is ${chalk.blue(title)}`))
 }
 
 async function getNotes(){

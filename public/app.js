@@ -4,7 +4,9 @@ document.addEventListener('click', async e => {
         removeTask(id).then(
             e.target.closest('li').remove()
         )
-    } else if (e.target.dataset.type === 'edit'){
+    }
+
+    if (e.target.dataset.type === 'edit'){
         const id = e.target.dataset.id
         const oldTitle = e.target.closest('li').dataset.title
         const newTitle = prompt('Enter new title', oldTitle)
@@ -24,7 +26,6 @@ async function removeTask(id){
 }
 
 async function editTask(id, newTitle){
-    console.log('editTask func front')
     await fetch(`/${id}-${newTitle}`, {
         method: 'PUT',
         headers: {

@@ -44,7 +44,6 @@ app.delete('/:id', async (req, res) => {
 
 app.put('/:id-:newTitle', async (req, res) => {
     await editNote(req.params.id, req.params.newTitle)
-    console.log(req.params)
     res.render('index', {
         title: 'Task app',
         notes: await getNotes(),
